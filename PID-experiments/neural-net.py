@@ -31,7 +31,7 @@ nn_batch_size = random.randint(1, len(data))"""
 """i, arg = sys.argv
 nn_batch_size = int(arg)"""
 
-nn_batch_size = 13
+nn_batch_size = 1
 # Save batch size to file
 batch_size_file = open(r"batch_size_file.txt", "w")
 batch_size_file.write(str(nn_batch_size))
