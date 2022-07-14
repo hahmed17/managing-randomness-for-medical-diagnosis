@@ -13,7 +13,7 @@ from datetime import datetime
 import sys
 
 # LOAD DATA
-data = pd.read_csv('..\..\pidd-preprocessed.csv', sep='\s*,\s*', header=0, names=['Pregnancies', 'Glucose', 'Insulin', 'BMI', 'Age', 'Outcome'])
+data = pd.read_csv('..\..\pidd-preprocessed-normalized.csv', sep='\s*,\s*', header=0, names=['Pregnancies', 'Glucose', 'Insulin', 'BMI', 'Age', 'Outcome'])
 
 # SET RANDOM SEED
 # Choose seed value (Max accuracy seed: 1657221665)

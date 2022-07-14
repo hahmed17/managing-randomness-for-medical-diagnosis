@@ -37,7 +37,15 @@ dataset_filename = sys.argv[2]
 
 # Load and pre-process data
 df = pd.read_csv(dataset_filename, header=None, na_values = {'?'})  
-df.fillna(0, inplace=True)  # Fill NaN values
+
+# Replace missing values with column means
+df.replace("?", np.nan, inplace = True)
+for col in df.columns:
+    df[col] = pd.to_numeric(df[col], errors='coerce', downcast="float")
+    col_avg = df[col].mean(skipna = True)
+    df[col].replace(np.nan, col_avg, inplace=True) 
+
+df = df.iloc[1: , :]  # Remove header
 
  # Split predictor and target columns
 X = df.iloc[:,:-1]

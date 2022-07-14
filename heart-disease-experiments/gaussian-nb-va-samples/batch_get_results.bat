@@ -3,4 +3,4 @@ for /l %%i in (1, 1, 100) do (
     awk /Accuracy/ out.txt >> ../accuracy.txt
     cd ..
 )
-cut -d " " -f 2- accuracy.txt > gnb-va-heart.txt
+cut -d " " -f 2- accuracy.txt > gaussian-nb-va-heart.txt
