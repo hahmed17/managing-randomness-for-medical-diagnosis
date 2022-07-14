@@ -20,18 +20,11 @@ data = pd.read_csv('..\..\pidd-preprocessed-normalized.csv', sep='\s*,\s*', head
 dt_int = int(datetime.utcnow().timestamp())
 
 
-# Generate random batch size
-"""import random
-batch_seed = int(datetime.utcnow().timestamp())
-random.seed(batch_seed)
-nn_batch_size = random.randint(1, len(data))"""
-
 # Set batch size (Max accuracy batch size: 13)
 # From command line
-"""i, arg = sys.argv
-nn_batch_size = int(arg)"""
+i, arg = sys.argv
+nn_batch_size = int(arg)
 
-nn_batch_size = 1
 # Save batch size to file
 batch_size_file = open(r"batch_size_file.txt", "w")
 batch_size_file.write(str(nn_batch_size))
@@ -95,8 +88,10 @@ neural_net_model.fit(X_train, y_train, batch_size=nn_batch_size, epochs=400, val
 
 # Evaluate neural net
 from sklearn.metrics import classification_report, accuracy_score, f1_score
-y_pred = neural_net_model.predict(X_test) > .9
+y_pred = neural_net_model.predict(X_test) 
+prediction = np.argmax(y_pred, axis=1)
+
 
 out_file = open("out.txt", "w")
-out_file.write("Accuracy: " + str(accuracy_score(y_test, y_pred)))
+out_file.write("Accuracy: " + str(accuracy_score(y_test, prediction)))
 out_file.close()
