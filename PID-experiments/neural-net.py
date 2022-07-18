@@ -16,8 +16,9 @@ import sys
 data = pd.read_csv('..\..\pidd-preprocessed-normalized.csv', sep='\s*,\s*', header=0, names=['Pregnancies', 'Glucose', 'Insulin', 'BMI', 'Age', 'Outcome'])
 
 # SET RANDOM SEED
-# Choose seed value (Max accuracy seed: 1657221665)
+# Choose seed value (Max accuracy seed: 1657854824)
 dt_int = int(datetime.utcnow().timestamp())
+#dt_int = 1657854824
 
 
 # Set batch size (Max accuracy batch size: 13)
@@ -87,11 +88,7 @@ neural_net_model.fit(X_train, y_train, batch_size=nn_batch_size, epochs=400, val
 
 
 # Evaluate neural net
-from sklearn.metrics import classification_report, accuracy_score, f1_score
-y_pred = neural_net_model.predict(X_test) 
-prediction = np.argmax(y_pred, axis=1)
-
-
+score = neural_net_model.evaluate(X_test, y_test, verbose=0)
 out_file = open("out.txt", "w")
-out_file.write("Accuracy: " + str(accuracy_score(y_test, prediction)))
+out_file.write("Accuracy: " + str(score[1]))
 out_file.close()
